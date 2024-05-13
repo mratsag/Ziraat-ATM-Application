@@ -8,12 +8,15 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class Signup extends JFrame {
-    JTextField textName, textSurname, textCardNo, textId;
+public class Signup extends JFrame implements ActionListener {
+    JTextField textName, textSurname, textCardNo, textId, textCardPass;
     JPasswordField CardPass;
     JDateChooser dateChooser;
+    JButton next;
 
     Random ran = new Random();
     long first1 = (ran.nextLong() % 9000L) + 1000L;
@@ -147,11 +150,41 @@ public class Signup extends JFrame {
         add(labelCardPas);
 
         //add card password
-        CardPass = new JPasswordField(4);
-        CardPass.setBounds(370, 530, 170, 30);
-        CardPass.setFont(new Font("Arial", Font.BOLD, 14));
-        add(CardPass);
+        textCardPass = new JPasswordField(4);
+        textCardPass.setBounds(370, 530, 170, 30);
+        textCardPass.setFont(new Font("Arial", Font.BOLD, 14));
+        add(textCardPass);
 
+        // DocumentFilter to allow only 4 digits
+        ((AbstractDocument) textCardPass.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if (isNumeric(string) && fb.getDocument().getLength() + string.length() <= 4) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (isNumeric(text) && fb.getDocument().getLength() - length + text.length() <= 4) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+
+            // Helper method to check if a string is numeric
+            private boolean isNumeric(String str) {
+                return str.matches("\\d+");
+            }
+        });
+
+        //next
+        next = new JButton("Diğer Sayfa");
+        next.setFont(new Font("Raleway",Font.BOLD,14));
+        next.setBackground(Color.WHITE);
+        next.setForeground(Color.BLACK);
+        next.setBounds(400,600,120,30);
+        next.addActionListener(this);
+        add(next);
 
         //background
         ImageIcon b1 = new ImageIcon(ClassLoader.getSystemResource("icon/backbg.jpg"));
@@ -167,6 +200,36 @@ public class Signup extends JFrame {
         this.setLocation(500, 200);
         this.setUndecorated(true);
         this.setVisible(true);
+    }
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String formno = first;
+        String tcno = textId.getText();
+        String name = textName.getText();
+        String surname = textSurname.getText();
+        String dob = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+        String cardno = textCardNo.getText();
+        String cardpas = textCardPass.getText();
+
+        try {
+            if (textName.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"Lütfen tüm alanları doldurun!");
+            }else{
+                Connect con = new Connect();
+                String q = "INSERT INTO signup VALUES ('"+formno+"','"+tcno+"','"+name+"','"+surname+"','"+dob+"','"+cardno+"','"+cardpas+"')";
+                con.statement.executeUpdate(q);
+                new Signup2();
+                setVisible(false);
+            }
+
+        }catch (Exception E){
+            E.printStackTrace();
+        }
+
     }
 
 
