@@ -54,7 +54,7 @@ public class Signup extends JFrame {
         //add textName
         textName = new JTextField(20);
         textName.setBounds(370, 330, 170, 30);
-        textName.setFont(new Font("Arial", 1, 14));
+        textName.setFont(new Font("Arial", Font.BOLD, 14));
         add(textName);
 
         //personal details (Surname)
@@ -67,7 +67,7 @@ public class Signup extends JFrame {
         //add textSurname
         textSurname = new JTextField(20);
         textSurname.setBounds(370, 370, 170, 30);
-        textSurname.setFont(new Font("Arial", 1, 14));
+        textSurname.setFont(new Font("Arial", Font.BOLD, 14));
         add(textSurname);
 
         //personal details (CardNo)
@@ -80,7 +80,7 @@ public class Signup extends JFrame {
         //add textCardNo
         textCardNo = new JTextField(20);
         textCardNo.setBounds(370, 410, 170, 30);
-        textCardNo.setFont(new Font("Arial", 1, 14));
+        textCardNo.setFont(new Font("Arial", Font.BOLD, 14));
         add(textCardNo);
 
         //personal details (CardPassword)
@@ -93,7 +93,7 @@ public class Signup extends JFrame {
         //add card password
         CardPass = new JPasswordField(4);
         CardPass.setBounds(370, 450, 170, 30);
-        CardPass.setFont(new Font("Arial", 1, 14));
+        CardPass.setFont(new Font("Arial", Font.BOLD, 14));
         add(CardPass);
 
 
