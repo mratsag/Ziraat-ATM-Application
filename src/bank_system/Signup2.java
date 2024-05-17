@@ -19,7 +19,8 @@ public class Signup2 extends JFrame {
     Map<String, String[]> districtsMap;
 
 
-    JTextField textAddress;
+    JTextField  textStreet;
+    JTextArea textAddress;
 
     Signup2(String first){
         super(" Kayıt ");
@@ -44,40 +45,57 @@ public class Signup2 extends JFrame {
         //add address
         JLabel l2 = new JLabel("Adres :");
         l2.setFont(new Font("Raleway",Font.BOLD,20));
-        l2.setBounds(230,330,500,30);
+        l2.setBounds(230,450,500,30);
         l2.setForeground(Color.WHITE);
         add(l2);
 
         //add address
-        textAddress = new JTextField(20);
-        textAddress.setBounds(370, 330, 300, 30);
+        textAddress = new JTextArea(3,20);
+        textAddress.setLineWrap(true);
+        textAddress.setWrapStyleWord(true);
         textAddress.setFont(new Font("Arial", Font.BOLD, 14));
-        add(textAddress);
-
-        //add city
-        JLabel l3 = new JLabel("Şehir :");
-        l3.setFont(new Font("Raleway",Font.BOLD,20));
-        l3.setBounds(230,370,500,30);
-        l3.setForeground(Color.WHITE);
-        add(l3);
-
-        //add city combox
-        comboBoxCities = new JComboBox<>();
-        comboBoxCities.setBounds(370, 370, 170, 30);
-        comboBoxCities.setFont(new Font("Arial", Font.BOLD, 14));
-        add(comboBoxCities);
+        JScrollPane scrollPane = new JScrollPane(textAddress);
+        scrollPane.setBounds(370, 450, 300, 60);
+        add(scrollPane);
 
 
-        //add district
-        JLabel l4 = new JLabel("İlçe :");
+        //add street
+        JLabel l4 = new JLabel("Sokak :");
         l4.setFont(new Font("Raleway",Font.BOLD,20));
         l4.setBounds(230,410,500,30);
         l4.setForeground(Color.WHITE);
         add(l4);
 
+        //add text street
+        textStreet = new JTextField(20);
+        textStreet.setBounds(370, 410, 150, 30);
+        textStreet.setFont(new Font("Arial", Font.BOLD, 14));
+        add(textStreet);
+
+        //add city
+        JLabel l3 = new JLabel("Şehir :");
+        l3.setFont(new Font("Raleway",Font.BOLD,20));
+        l3.setBounds(230,330,500,30);
+        l3.setForeground(Color.WHITE);
+        add(l3);
+
+        //add city combox
+        comboBoxCities = new JComboBox<>();
+        comboBoxCities.setBounds(370, 330, 170, 30);
+        comboBoxCities.setFont(new Font("Arial", Font.BOLD, 14));
+        add(comboBoxCities);
+
+
+        //add district
+        JLabel l5 = new JLabel("İlçe :");
+        l5.setFont(new Font("Raleway",Font.BOLD,20));
+        l5.setBounds(230,370,500,30);
+        l5.setForeground(Color.WHITE);
+        add(l5);
+
         //add district combox
         comboBoxDistrict = new JComboBox<>();
-        comboBoxDistrict.setBounds(370, 410, 170, 30);
+        comboBoxDistrict.setBounds(370, 370, 170, 30);
         comboBoxDistrict.setFont(new Font("Arial", Font.BOLD, 14));
         add(comboBoxDistrict);
 
