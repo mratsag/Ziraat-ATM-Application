@@ -13,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Signup2 extends JFrame {
+public class Signup2 extends JFrame implements ActionListener {
+
     String formno;
     JComboBox<String> comboBoxCities, comboBoxDistrict;
     Map<String, String[]> districtsMap;
@@ -21,6 +22,7 @@ public class Signup2 extends JFrame {
 
     JTextField  textStreet;
     JTextArea textAddress;
+    JButton next;
 
     Signup2(String first){
         super(" Kayıt ");
@@ -41,6 +43,20 @@ public class Signup2 extends JFrame {
         l1.setBounds(350,230,500,30);
         l1.setForeground(Color.WHITE);
         add(l1);
+
+        //form no
+        JLabel label1 = new JLabel("Üye Başvuru No:");
+        label1.setBounds(230,280,500,45);
+        label1.setForeground(Color.WHITE);
+        label1.setFont(new Font("Raleway",Font.BOLD,18));
+        add(label1);
+
+        JLabel label2 = new JLabel(formno);
+        label2.setBounds(330,280,500,45);
+        label2.setForeground(Color.WHITE);
+        label2.setFont(new Font("Raleway",Font.BOLD,18));
+        add(label2);
+
 
         //add address
         JLabel l2 = new JLabel("Adres :");
@@ -115,8 +131,14 @@ public class Signup2 extends JFrame {
         });
 
 
-
-
+        //next
+        next = new JButton("Diğer Sayfa");
+        next.setFont(new Font("Raleway",Font.BOLD,14));
+        next.setBackground(Color.WHITE);
+        next.setForeground(Color.BLACK);
+        next.setBounds(370,600,120,30);
+        next.addActionListener(this);
+        add(next);
 
         //background
         ImageIcon b1 = new ImageIcon(ClassLoader.getSystemResource("icon/backbg.jpg"));
@@ -132,6 +154,10 @@ public class Signup2 extends JFrame {
         this.setLocation(500, 200);
         this.setUndecorated(true);
         this.setVisible(true);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 
     private void loadCityDistrictData() {

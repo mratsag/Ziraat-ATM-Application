@@ -40,12 +40,6 @@ public class Signup extends JFrame implements ActionListener {
         label1.setFont(new Font("Raleway",Font.BOLD,38));
         add(label1);
 
-        //add page 1
-        /*JLabel label2 = new JLabel("Page 1");
-        label2.setFont(new Font("Raleway",Font.BOLD,22));
-        label2.setBounds(230,250,500,30);
-        label2.setForeground(Color.WHITE);
-        add(label2);*/
 
         //add
         JLabel label3 = new JLabel("Kişisel Bilgiler");
