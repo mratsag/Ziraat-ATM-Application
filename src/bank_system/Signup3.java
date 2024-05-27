@@ -1,11 +1,18 @@
 package bank_system;
 
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Signup3 extends JFrame {
+public class Signup3 extends JFrame implements ActionListener{
     JRadioButton r1,r2,r3,r4;
     JTextField accountNumberField, ibanField;
+    JButton submit;
 
     Signup3(){
         //account details
@@ -74,8 +81,70 @@ public class Signup3 extends JFrame {
         add(ibanLabel);
         ibanField = new JTextField();
         ibanField.setBounds(130, 410, 300, 30);
-        ibanField.setFont(new Font("Raleway",Font.BOLD,20));
+        ibanField.setFont(new Font("Raleway", Font.BOLD, 20));
+
+        // Add document filter to restrict input length
+        ((AbstractDocument) ibanField.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if ((fb.getDocument().getLength() + string.length()) <= 26) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if ((fb.getDocument().getLength() + text.length() - length) <= 26) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
         add(ibanField);
+
+        //add validate button
+        JButton validateButton = new JButton("Kontrol et");
+        validateButton.setBounds(130, 450, 100, 30);
+        validateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                validateIban();
+            }
+
+            private void validateIban() {
+                String iban = ibanField.getText().trim();
+                if (iban.length() == 26 && iban.startsWith("TR")) {
+                    JOptionPane.showMessageDialog(Signup3.this, "IBAN geçerlidir.");
+                } else {
+                    JOptionPane.showMessageDialog(Signup3.this, "Geçersiz IBAN. 26 karakter uzunluğunda olmalı ve 'TR' ile başlamalıdır.");
+                }
+            }
+        });
+        add(validateButton);
+
+        //add checkBox
+        JCheckBox c = new JCheckBox("<html><font color='white'>Bu Banka Başvuru Formu’nda verdiğim bilgilerin/yazdıklarımın doğru, eksiksiz ve gerçeğe uygun olduğunu, aksi halde başvurumun kabul edilmeyeceğini kabul ve beyan ederim.</html>");
+        c.setFont(new Font("Raleway", Font.BOLD, 12));
+        c.setBounds(130, 500, 600, 40);
+        c.setOpaque(false);
+        add(c);
+
+
+        //submit
+        submit = new JButton("Gönder");
+        submit.setFont(new Font("Raleway", Font.BOLD, 14));
+        submit.setBackground(Color.white);
+        submit.setForeground(Color.BLACK);
+        submit.setBounds(600,620,100,30);
+        add(submit);
+
+        //submit
+        submit = new JButton("İptal et");
+        submit.setFont(new Font("Raleway", Font.BOLD, 14));
+        submit.setBackground(Color.white);
+        submit.setForeground(Color.BLACK);
+        submit.setBounds(480,620,100,30);
+        add(submit);
+
 
         //add bank logo
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/bank.png"));
@@ -101,6 +170,11 @@ public class Signup3 extends JFrame {
         this.setVisible(true);
     }
 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 
     public static void main(String[] args) {
         new Signup3();
