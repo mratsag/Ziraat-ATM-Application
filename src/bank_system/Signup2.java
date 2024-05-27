@@ -12,9 +12,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static jdk.internal.agent.Agent.getText;
+
 
 public class Signup2 extends JFrame implements ActionListener {
-
     String formno;
     JComboBox<String> comboBoxCities, comboBoxDistrict;
     Map<String, String[]> districtsMap;
@@ -24,7 +25,7 @@ public class Signup2 extends JFrame implements ActionListener {
     JTextArea textAddress;
     JButton next;
 
-    Signup2(String first){
+    Signup2(String formno){
         super(" Kayıt ");
 
         //add bank logo
@@ -57,6 +58,44 @@ public class Signup2 extends JFrame implements ActionListener {
         label2.setFont(new Font("Raleway",Font.BOLD,18));
         add(label2);
 
+        //add city
+        JLabel l3 = new JLabel("Şehir :");
+        l3.setFont(new Font("Raleway",Font.BOLD,20));
+        l3.setBounds(230,330,500,30);
+        l3.setForeground(Color.WHITE);
+        add(l3);
+
+        //add city combox
+        comboBoxCities = new JComboBox<>();
+        comboBoxCities.setBounds(370, 330, 170, 30);
+        comboBoxCities.setFont(new Font("Arial", Font.BOLD, 14));
+        add(comboBoxCities);
+
+        //add district
+        JLabel l5 = new JLabel("İlçe :");
+        l5.setFont(new Font("Raleway",Font.BOLD,20));
+        l5.setBounds(230,370,500,30);
+        l5.setForeground(Color.WHITE);
+        add(l5);
+
+        //add district combox
+        comboBoxDistrict = new JComboBox<>();
+        comboBoxDistrict.setBounds(370, 370, 170, 30);
+        comboBoxDistrict.setFont(new Font("Arial", Font.BOLD, 14));
+        add(comboBoxDistrict);
+
+        //add street
+        JLabel l4 = new JLabel("Sokak :");
+        l4.setFont(new Font("Raleway",Font.BOLD,20));
+        l4.setBounds(230,410,500,30);
+        l4.setForeground(Color.WHITE);
+        add(l4);
+
+        //add text street
+        textStreet = new JTextField(20);
+        textStreet.setBounds(370, 410, 150, 30);
+        textStreet.setFont(new Font("Arial", Font.BOLD, 14));
+        add(textStreet);
 
         //add address
         JLabel l2 = new JLabel("Adres :");
@@ -73,47 +112,6 @@ public class Signup2 extends JFrame implements ActionListener {
         JScrollPane scrollPane = new JScrollPane(textAddress);
         scrollPane.setBounds(370, 450, 300, 60);
         add(scrollPane);
-
-
-        //add street
-        JLabel l4 = new JLabel("Sokak :");
-        l4.setFont(new Font("Raleway",Font.BOLD,20));
-        l4.setBounds(230,410,500,30);
-        l4.setForeground(Color.WHITE);
-        add(l4);
-
-        //add text street
-        textStreet = new JTextField(20);
-        textStreet.setBounds(370, 410, 150, 30);
-        textStreet.setFont(new Font("Arial", Font.BOLD, 14));
-        add(textStreet);
-
-        //add city
-        JLabel l3 = new JLabel("Şehir :");
-        l3.setFont(new Font("Raleway",Font.BOLD,20));
-        l3.setBounds(230,330,500,30);
-        l3.setForeground(Color.WHITE);
-        add(l3);
-
-        //add city combox
-        comboBoxCities = new JComboBox<>();
-        comboBoxCities.setBounds(370, 330, 170, 30);
-        comboBoxCities.setFont(new Font("Arial", Font.BOLD, 14));
-        add(comboBoxCities);
-
-
-        //add district
-        JLabel l5 = new JLabel("İlçe :");
-        l5.setFont(new Font("Raleway",Font.BOLD,20));
-        l5.setBounds(230,370,500,30);
-        l5.setForeground(Color.WHITE);
-        add(l5);
-
-        //add district combox
-        comboBoxDistrict = new JComboBox<>();
-        comboBoxDistrict.setBounds(370, 370, 170, 30);
-        comboBoxDistrict.setFont(new Font("Arial", Font.BOLD, 14));
-        add(comboBoxDistrict);
 
         //load data
         loadCityDistrictData();
@@ -155,10 +153,6 @@ public class Signup2 extends JFrame implements ActionListener {
         this.setUndecorated(true);
         this.setVisible(true);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
     private void loadCityDistrictData() {
         districtsMap = new HashMap<>();
@@ -183,6 +177,29 @@ public class Signup2 extends JFrame implements ActionListener {
             for (String district: districts){
                 comboBoxDistrict.addItem(district);
             }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String city = (String) comboBoxCities.getSelectedItem();
+        String district = (String) comboBoxDistrict.getSelectedItem();
+        String street = textStreet.getText();
+        String address = textAddress.getText();
+
+        try {
+            if (city.isEmpty() || district.isEmpty() || street.isEmpty() || address.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Lütfen tüm alanları doldurun!");
+            }else {
+                Connect con = new Connect();
+                String query = "INSERT INTO signuptwo VALUES ('"+formno+"','"+city+"','"+district+"','"+street+"','"+address+"')";
+                con.statement.executeUpdate(query);
+                new Signup3();
+                setVisible(false);
+            }
+
+        }catch (Exception E){
+            E.printStackTrace();
         }
     }
 

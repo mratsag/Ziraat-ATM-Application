@@ -128,7 +128,6 @@ public class Signup3 extends JFrame implements ActionListener{
         c.setOpaque(false);
         add(c);
 
-
         //submit
         submit = new JButton("Gönder");
         submit.setFont(new Font("Raleway", Font.BOLD, 14));

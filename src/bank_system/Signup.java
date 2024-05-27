@@ -20,7 +20,7 @@ public class Signup extends JFrame implements ActionListener {
 
     Random ran = new Random();
     long first1 = (ran.nextLong() % 9000L) + 1000L;
-    String first = " " + Math.abs(first1);
+    String formno = " " + Math.abs(first1);
 
     Signup(){
         super(" Kayıt ");
@@ -200,8 +200,6 @@ public class Signup extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        String formno = first;
         String tcno = textId.getText();
         String name = textName.getText();
         String surname = textSurname.getText();
@@ -216,7 +214,7 @@ public class Signup extends JFrame implements ActionListener {
                 Connect con = new Connect();
                 String q = "INSERT INTO signup VALUES ('"+formno+"','"+tcno+"','"+name+"','"+surname+"','"+dob+"','"+cardno+"','"+cardpas+"')";
                 con.statement.executeUpdate(q);
-                new Signup2(first);
+                new Signup2(formno);
                 setVisible(false);
             }
 
