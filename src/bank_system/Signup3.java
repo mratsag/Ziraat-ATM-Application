@@ -8,11 +8,12 @@ import javax.swing.text.DocumentFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Signup3 extends JFrame implements ActionListener{
     JRadioButton r1,r2,r3,r4;
     JTextField accountNumberField, ibanField;
-    JButton submit;
+    JButton submit,cancel;
 
     Signup3(){
         //account details
@@ -71,6 +72,24 @@ public class Signup3 extends JFrame implements ActionListener{
         accountNumberField = new JTextField();
         accountNumberField.setBounds(130, 340, 300, 30);
         accountNumberField.setFont(new Font("Raleway",Font.BOLD,18));
+
+        // Set document filter to limit to 16 characters
+        ((AbstractDocument) accountNumberField.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                if ((fb.getDocument().getLength() + string.length()) <= 16) {
+                    super.insertString(fb, offset, string, attr);
+                }
+            }
+
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if ((fb.getDocument().getLength() + text.length() - length) <= 16) {
+                    super.replace(fb, offset, length, text, attrs);
+                }
+            }
+        });
+
         add(accountNumberField);
 
         //add iban
@@ -134,15 +153,17 @@ public class Signup3 extends JFrame implements ActionListener{
         submit.setBackground(Color.white);
         submit.setForeground(Color.BLACK);
         submit.setBounds(600,620,100,30);
+        submit.addActionListener(this);
         add(submit);
 
-        //submit
-        submit = new JButton("İptal et");
-        submit.setFont(new Font("Raleway", Font.BOLD, 14));
-        submit.setBackground(Color.white);
-        submit.setForeground(Color.BLACK);
-        submit.setBounds(480,620,100,30);
-        add(submit);
+        //cancel
+        cancel = new JButton("İptal et");
+        cancel.setFont(new Font("Raleway", Font.BOLD, 14));
+        cancel.setBackground(Color.white);
+        cancel.setForeground(Color.BLACK);
+        cancel.setBounds(480,620,100,30);
+        cancel.addActionListener(this);
+        add(cancel);
 
 
         //add bank logo
@@ -172,6 +193,38 @@ public class Signup3 extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String account_no = accountNumberField.getText();
+        String iban = ibanField.getText();
+
+        String account_type = null;
+        if (r1.isSelected()){
+            account_type = "Cari Hesap";
+        } else if (r2.isSelected()) {
+            account_type = "Katılma Hesabı";
+        } else if (r3.isSelected()){
+            account_type = "Altın Hesapları";
+        }else if (r4.isSelected()){
+            account_type = "Gümüş Hesapları";
+        }
+
+        try {
+            if (e.getSource() == submit){
+                if (account_type.equals("")){
+                    JOptionPane.showMessageDialog(null,"Tüm alanları doldurunuz.");
+                }else {
+                    Connect con = new Connect();
+                    String query = "INSERT INTO signupthree VALUES ('"+account_type+"','"+account_no+"','"+iban+"')";
+                    con.statement.executeUpdate(query);
+                    setVisible(false);
+                }
+            } else if (e.getSource()==cancel) {
+                System.exit(0);
+            }
+
+
+        }catch (Exception E){
+            E.printStackTrace();
+        }
 
     }
 

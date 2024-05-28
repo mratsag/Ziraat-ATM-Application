@@ -34,7 +34,7 @@ public class Signup extends JFrame implements ActionListener {
         this.add(image);
 
         //add application form no
-        JLabel label1 = new JLabel("Üye Başvuru No:" + first);
+        JLabel label1 = new JLabel("Üye Başvuru No:" + formno);
         label1.setBounds(230,150,500,45);
         label1.setForeground(Color.WHITE);
         label1.setFont(new Font("Raleway",Font.BOLD,38));
@@ -213,7 +213,10 @@ public class Signup extends JFrame implements ActionListener {
             }else{
                 Connect con = new Connect();
                 String q = "INSERT INTO signup VALUES ('"+formno+"','"+tcno+"','"+name+"','"+surname+"','"+dob+"','"+cardno+"','"+cardpas+"')";
+                String q2 = "INSERT INTO login VALUES ('"+formno+"','"+cardno+"','"+cardpas+"')";
                 con.statement.executeUpdate(q);
+                con.statement.executeUpdate(q2);
+                JOptionPane.showMessageDialog(null,"Kart no : "+cardno+"\n Şifre : "+cardpas);
                 new Signup2(formno);
                 setVisible(false);
             }
