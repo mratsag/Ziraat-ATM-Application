@@ -13,6 +13,7 @@ public class Deposit extends JFrame {
 
 
 
+
         // Background
         ImageIcon b1 = new ImageIcon(ClassLoader.getSystemResource("icon/backbg.jpg"));
         Image b2 = b1.getImage().getScaledInstance(850, 700, 1);
