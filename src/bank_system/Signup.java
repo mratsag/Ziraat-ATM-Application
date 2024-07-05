@@ -218,7 +218,7 @@ public class Signup extends JFrame implements ActionListener {
                 con.statement.executeUpdate(q2);
                 JOptionPane.showMessageDialog(null,"Kart no : "+cardno+"\n Şifre : "+cardpas);
                 new Signup2(formno);
-                new Deposit(cardpas);
+               // new Deposit(cardpas);
                 setVisible(false);
             }
 

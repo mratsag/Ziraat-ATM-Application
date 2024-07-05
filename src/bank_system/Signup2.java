@@ -53,7 +53,7 @@ public class Signup2 extends JFrame implements ActionListener {
         add(label1);
 
         JLabel label2 = new JLabel(formno);
-        label2.setBounds(330,280,500,45);
+        label2.setBounds(400,280,500,45);
         label2.setForeground(Color.WHITE);
         label2.setFont(new Font("Raleway",Font.BOLD,18));
         add(label2);
