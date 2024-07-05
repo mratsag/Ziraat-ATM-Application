@@ -6,28 +6,39 @@ import java.awt.*;
 public class Deposit extends JFrame {
 
     String cardpas;
+    TextField textField;
+
+
     Deposit(String cardpas){
         this.cardpas = cardpas;
 
-
-
-
-
-
         // Background
-        ImageIcon b1 = new ImageIcon(ClassLoader.getSystemResource("icon/backbg.jpg"));
-        Image b2 = b1.getImage().getScaledInstance(850, 700, 1);
-        ImageIcon b3 = new ImageIcon(b2);
-        JLabel bImage = new JLabel(b3);
-        bImage.setBounds(0, 0, 850, 700);
-        this.add(bImage);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png")) ;
+        Image i2 = i1.getImage().getScaledInstance(1550,830,Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l1 = new JLabel(i3);
+        l1.setBounds(0,0,1550,830);
+        add(l1);
+
+        //Deposit main
+        JLabel label1 = new JLabel("YATIRMAK İSTEDİĞİNİZ TUTARI GİRİNİZ:");
+        label1.setForeground(Color.white);
+        label1.setFont(new Font("System", Font.BOLD, 16));
+        label1.setBounds(460,180,400,35);
+        l1.add(label1);
+
+        textField = new TextField();
+        textField.setBackground(new Color(202, 200, 200));
+        textField.setForeground(Color.BLACK);
+        textField.setBounds(460,230,320,25);
+        textField.setFont(new Font("Raleway", Font.BOLD,22));
+        l1.add(textField);
 
         // Set screen
-        this.setLayout(null);
-        this.setSize(850, 700);
-        this.setLocation(400, 100);
-        this.setUndecorated(true);
-        this.setVisible(true);
+        setLayout(null);
+        setSize(1550, 1080);
+        setLocation(0,0);
+        setVisible(true);
     }
 
 
