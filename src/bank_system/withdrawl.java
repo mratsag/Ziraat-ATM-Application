@@ -50,40 +50,44 @@ public class withdrawl extends JFrame implements ActionListener {
         b2.addActionListener(this);
         l1.add(b2);
 
-        //20
-        b3= new JButton("20");
-        b3.setBounds(405,270,150,35);
-        b3.setBackground(new Color(202,200,200));
+        // 20
+        b3 = new JButton("20");
+        b3.setBounds(405, 270, 150, 35);
+        b3.setBackground(new Color(202, 200, 200));
         b3.setForeground(Color.BLACK);
+        b3.addActionListener(this);
         l1.add(b3);
 
-        //200
-        b4= new JButton("200");
-        b4.setBounds(705,270,150,35);
-        b4.setBackground(new Color(202,200,200));
+        // 200
+        b4 = new JButton("200");
+        b4.setBounds(705, 270, 150, 35);
+        b4.setBackground(new Color(202, 200, 200));
         b4.setForeground(Color.BLACK);
+        b4.addActionListener(this);
         l1.add(b4);
 
-        //50
-        b5= new JButton("50");
-        b5.setBounds(405,316,150,35);
-        b5.setBackground(new Color(202,200,200));
+        // 50
+        b5 = new JButton("50");
+        b5.setBounds(405, 316, 150, 35);
+        b5.setBackground(new Color(202, 200, 200));
         b5.setForeground(Color.BLACK);
+        b5.addActionListener(this);
         l1.add(b5);
 
-
-        //500
-        b6= new JButton("500");
-        b6.setBounds(705,316,150,35);
-        b6.setBackground(new Color(202,200,200));
+        // 500
+        b6 = new JButton("500");
+        b6.setBounds(705, 316, 150, 35);
+        b6.setBackground(new Color(202, 200, 200));
         b6.setForeground(Color.BLACK);
+        b6.addActionListener(this);
         l1.add(b6);
 
-        //100
-        b7= new JButton("100");
-        b7.setBounds(405,363,150,35);
-        b7.setBackground(new Color(202,200,200));
+        // 100
+        b7 = new JButton("100");
+        b7.setBounds(405, 363, 150, 35);
+        b7.setBackground(new Color(202, 200, 200));
         b7.setForeground(Color.BLACK);
+        b7.addActionListener(this);
         l1.add(b7);
 
         // Set screen
@@ -95,11 +99,21 @@ public class withdrawl extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==b1){
+        if (e.getSource() == b1) {
 
-        } else if (e.getSource()==b2) {
+        } else if (e.getSource() == b2) {
             new main_class(cardpas);
             setVisible(false);
+        } else if (e.getSource() == b3) {
+            textField.setText("20");
+        } else if (e.getSource() == b4) {
+            textField.setText("200");
+        } else if (e.getSource() == b5) {
+            textField.setText("50");
+        } else if (e.getSource() == b6) {
+            textField.setText("500");
+        } else if (e.getSource() == b7) {
+            textField.setText("100");
         }
     }
 
