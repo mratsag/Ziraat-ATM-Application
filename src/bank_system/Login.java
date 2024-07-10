@@ -103,7 +103,7 @@ public class Login extends JFrame implements ActionListener{
         //set screen
         this.setLayout((LayoutManager)null);
         this.setSize(850, 550);
-        this.setLocation(500, 300);
+        this.setLocation(400, 140);
         this.setUndecorated(true);
         this.setVisible(true);
     }
@@ -123,6 +123,8 @@ public class Login extends JFrame implements ActionListener{
                 if (resultSet.next()){
                     setVisible(false);
                     new main_class(cardpas);
+                }else {
+                    JOptionPane.showMessageDialog(null,"CARD NUMARASI VEYA ŞİFRENİZ YANLIŞ!");
                 }
             }else if (e.getSource() == button2){
                 System.exit(0);
