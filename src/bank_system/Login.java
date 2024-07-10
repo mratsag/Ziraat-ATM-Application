@@ -1,9 +1,12 @@
 package bank_system;
 
 import javax.swing.*;
+import javax.xml.transform.Result;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener{
     JLabel label1,label2,label3;
@@ -109,7 +112,18 @@ public class Login extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         try {
             if (e.getSource() == button1){
-                
+                String cardno = textField.getText();
+                String cardpas = passwordField.getText();
+                Connect c = new Connect();
+                String query = "SELECT * FROM login WHERE card_no = ? AND card_password = ?";
+                PreparedStatement stmt = c.connection.prepareStatement(query);
+                stmt.setString(1, cardno);
+                stmt.setString(2, cardpas);
+                ResultSet resultSet = stmt.executeQuery();
+                if (resultSet.next()){
+                    setVisible(false);
+                    new main_class(cardpas);
+                }
             }else if (e.getSource() == button2){
                 System.exit(0);
                 

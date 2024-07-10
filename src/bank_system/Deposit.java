@@ -80,6 +80,7 @@ public class Deposit extends JFrame implements ActionListener {
                     setVisible(false);
                 }
             } else if (e.getSource()==b2) {
+                new main_class(cardpas);
                 setVisible(false);
             }
         }catch (Exception E){
