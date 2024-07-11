@@ -1,9 +1,12 @@
 package bank_system;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.util.Date;
 
 public class withdrawl extends JFrame implements ActionListener {
     TextField textField;
@@ -90,6 +93,8 @@ public class withdrawl extends JFrame implements ActionListener {
         b7.addActionListener(this);
         l1.add(b7);
 
+
+
         // Set screen
         setLayout(null);
         setSize(1550, 1080);
@@ -100,7 +105,34 @@ public class withdrawl extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == b1) {
-
+            try {
+                String amount = textField.getText();
+                Date date = new Date();
+                if (textField.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "ÇEKMEK İSTEDİĞİNİZ MİKTARI GİRİNİZ.");
+                } else {
+                    Connect c = new Connect();
+                    ResultSet resultSet = c.statement.executeQuery("SELECT * FROM bank WHERE cardpas = '" + cardpas + "'");
+                    int balance = 0;
+                    while (resultSet.next()) {
+                        if (resultSet.getString("type").equals("Deposit")) {
+                            balance += Integer.parseInt(resultSet.getString("amount"));
+                        } else {
+                            balance -= Integer.parseInt(resultSet.getString("amount"));
+                        }
+                    }
+                    if (balance < Integer.parseInt(amount)) {
+                        JOptionPane.showMessageDialog(null, "YETERSİZ BAKİYE");
+                        return;
+                    }
+                    c.statement.executeUpdate("INSERT INTO bank VALUES('" + cardpas + "','" + date + "','withdrawl','" + amount + "')");
+                    JOptionPane.showMessageDialog(null, "Rs. " + amount + " PARA ÇEKME BAŞARILI");
+                    setVisible(false);
+                    new another();
+                }
+            } catch (Exception E) {
+                E.printStackTrace();
+            }
         } else if (e.getSource() == b2) {
             new main_class(cardpas);
             setVisible(false);
@@ -116,6 +148,7 @@ public class withdrawl extends JFrame implements ActionListener {
             textField.setText("100");
         }
     }
+
 
     public static void main(String[] args) {
         new withdrawl("");

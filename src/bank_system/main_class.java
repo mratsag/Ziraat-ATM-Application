@@ -93,6 +93,7 @@ public class main_class extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==b1){
+            new withdrawl(cardpas);
             setVisible(false);
         } else if (e.getSource()==b2) {
             new Deposit(cardpas);
@@ -104,6 +105,7 @@ public class main_class extends JFrame implements ActionListener {
         }else if (e.getSource()==b5) {
             setVisible(false);
         }else if (e.getSource()==b6) {
+            new BalanceCal(cardpas);
             setVisible(false);
         }else if (e.getSource()==b7) {
             System.exit(0);

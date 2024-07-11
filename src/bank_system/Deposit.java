@@ -78,6 +78,7 @@ public class Deposit extends JFrame implements ActionListener {
                     c.statement.executeUpdate("INSERT INTO bank values('"+cardpas+"','"+date+"','Deposit','"+amount+"')");
                     JOptionPane.showMessageDialog(null,"Rs. "+amount+" Para yatırma başarılı.");
                     setVisible(false);
+                    new another();
                 }
             } else if (e.getSource()==b2) {
                 new main_class(cardpas);
