@@ -14,7 +14,7 @@ public class Login extends JFrame implements ActionListener{
     JPasswordField passwordField;
     JButton button1,button2,button3;
 
-    public Login(){
+    Login(){
         super("Ziraat Bankası");
         //add bank image
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/bank.png"));
