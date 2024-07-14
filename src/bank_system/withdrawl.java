@@ -151,6 +151,6 @@ public class withdrawl extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new withdrawl("");
+        new withdrawl(" ");
     }
 }
