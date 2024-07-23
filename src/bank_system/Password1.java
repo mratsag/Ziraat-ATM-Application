@@ -8,8 +8,10 @@ import java.awt.event.ActionListener;
 public class Password1 extends JFrame implements ActionListener {
     JButton b1;
     JLabel l1;
+    String cardpas;
 
-    Password1() {
+    Password1(String cardpas) {
+        this.cardpas = cardpas;
         // Background
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
         Image i2 = i1.getImage().getScaledInstance(1550, 830, Image.SCALE_DEFAULT);
@@ -61,11 +63,12 @@ public class Password1 extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == b1) {
-
+            new Password2(cardpas);
+            setVisible(false);
         }
     }
 
     public static void main(String[] args) {
-        new Password1();
+        new Password1("");
     }
 }

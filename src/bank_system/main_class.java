@@ -99,11 +99,13 @@ public class main_class extends JFrame implements ActionListener {
             new Deposit(cardpas);
             setVisible(false);
         }else if (e.getSource()==b3) {
+            new Error(cardpas);
             setVisible(false);
         }else if (e.getSource()==b4) {
             new Payment(cardpas);
             setVisible(false);
         }else if (e.getSource()==b5) {
+            new Password1(cardpas);
             setVisible(false);
         }else if (e.getSource()==b6) {
             new BalanceCal(cardpas);

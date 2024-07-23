@@ -85,6 +85,7 @@ public class Bill extends JFrame implements ActionListener {
             new Error(cardpas);
             setVisible(false);
         }else if (e.getSource()==b5) {
+            new Error(cardpas);
             setVisible(false);
         }
     }

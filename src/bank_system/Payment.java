@@ -104,7 +104,23 @@ public class Payment extends JFrame implements ActionListener {
         } else if (e.getSource()==b3) {
             new Bill(cardpas);
             setVisible(false);
+        }else if (e.getSource()==b4) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b5) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b6) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b7) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b8) {
+            new Error(cardpas);
+            setVisible(false);
         }
+
     }
 
     public static void main(String[] args) {

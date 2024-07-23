@@ -89,10 +89,26 @@ public class Payment2 extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==b1){
-
-        } else if (e.getSource()==b2) {
+        if (e.getSource()==b2) {
             new Payment(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b3) {
+            new Bill(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b4) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b5) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b6) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b7) {
+            new Error(cardpas);
+            setVisible(false);
+        }else if (e.getSource()==b8) {
+            new Error(cardpas);
             setVisible(false);
         }
     }
