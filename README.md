@@ -16,6 +16,7 @@ This project is a simulation of an ATM application designed to replicate the fun
 ![signup3](https://github.com/user-attachments/assets/cb0ab856-b792-4e05-b0c4-6961c6b2e0ca)
 
 
+
 ### Login Page
 
 - **User Authentication:** Allows users to log into their accounts by entering their credentials. The system verifies the username and password against the stored data.
